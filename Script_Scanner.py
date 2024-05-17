@@ -198,13 +198,7 @@ def generate_html_report(websites, changes_summary, details, baseline_data, csp_
             .header-change {{
                 background-color: #ffcccc;
             }}
-            .footer {{
-                text-align: center;
-                padding: 10px;
-                background: #333;
-                color: #fff;
-                margin-top: 20px;
-            }}
+
             .checkmark {{
                 color: green;
                 font-size: 1.2em;
@@ -240,7 +234,7 @@ def generate_html_report(websites, changes_summary, details, baseline_data, csp_
         removed_scripts_check = get_checkmark(len(changes.get('removed_scripts', [])) == 0)
         html_content += f"""
             <div class="summary section">
-                <h2>Summary of changes detected for {url} (compliance with PCI DSS 6.4.3 and 11.6.1):</h2>
+                <h4>Summary of changes detected for {url}</h4>
                 <ul class="compliance">
                     <li><span class="checkmark">{new_scripts_check}</span><span>Script is authorized.</span></li>
                     <li><span class="checkmark">{changed_scripts_check}</span><span>Script integrity is assured.</span></li>
@@ -268,11 +262,11 @@ def generate_html_report(websites, changes_summary, details, baseline_data, csp_
 
     html_content += """
             <div class="details section">
-                <h2>Detailed changes:</h2>"""
+                <h4>Detailed changes:</h4>"""
 
     for url, url_details in details.items():
         html_content += f"""
-                <h3>Website: {url}</h3>
+                <p>Website: {url}</p>
                 <table>
                     <tr>
                         <th>Change Type</th>
@@ -312,11 +306,11 @@ def generate_html_report(websites, changes_summary, details, baseline_data, csp_
     html_content += """
             </div>
             <div class="authorized section">
-                <h2>Authorized Scripts Inventory and Justification:</h2>"""
+                <h4>Authorized Scripts Inventory and Justification:</h4>"""
 
     for url, scripts in baseline_data.items():
         html_content += f"""
-                <h3>Website: {url}</h3>
+                <p>Website: {url}</p>
                 <table>
                     <tr>
                         <th>Script</th>
@@ -335,9 +329,7 @@ def generate_html_report(websites, changes_summary, details, baseline_data, csp_
 
     html_content += """
         </div>
-        <div class="footer">
-            <p>Scan Report generated on {timestamp}</p>
-        </div>
+
     </body>
     </html>"""
 
